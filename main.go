@@ -10,7 +10,10 @@ import (
 )
 
 func main() {
-	reader := bufio.NewReader(os.Stdin) // shared reader for all input
+	reader := bufio.NewReader(os.Stdin)
+
+	// Load contacts from file
+	services.LoadContacts()
 
 	for {
 		fmt.Println("\n=== Contact Book CLI ===")
@@ -21,9 +24,7 @@ func main() {
 		var choice int
 		fmt.Print("Enter choice: ")
 		fmt.Scan(&choice)
-
-		// 🧹 Clean the leftover newline
-		reader.ReadString('\n')
+		reader.ReadString('\n') // Clean newline
 
 		switch choice {
 		case 1:
@@ -40,7 +41,7 @@ func main() {
 			return
 
 		default:
-			fmt.Println("3Invalid choice. Please try again.")
+			fmt.Println("❌ Invalid choice. Please try again.")
 		}
 	}
 }
